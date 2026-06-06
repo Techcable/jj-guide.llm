@@ -130,7 +130,7 @@ Functions that take a string pattern accept these prefixes:
 - `regex:"^feat.*"` — Rust regex
 - `regex-i:"..."`
 
-> The default for plain `"string"` will change from `substring:` to `glob:` in a future release. Set `ui.revsets-use-glob-by-default = true` in `~/.config/jj/config.toml` to opt in early.
+> The default for plain `"string"` will change from `substring:` to `glob:` in a future release. The user can opt in early by setting `ui.revsets-use-glob-by-default = true` in `~/.config/jj/config.toml` — but **don't make that config change yourself without explicit permission** (see the config-permission rule in `SKILL.md`). Until then, use an explicit `substring:`/`glob:` prefix when the distinction matters.
 
 ## Date Patterns
 

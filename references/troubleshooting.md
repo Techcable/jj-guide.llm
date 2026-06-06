@@ -109,14 +109,16 @@ Config is layered (highest priority wins):
 4. User config (`~/.config/jj/config.toml`)
 5. Built-in defaults
 
+`jj config list` is read-only and safe. **Any config *write* (`jj config set`, `jj config edit`, whether `--user` or `--repo`) requires explicit user permission** — these settings are persistent and silently change later behavior (e.g. `git.push`/`git.fetch` redirect where your code goes; `trunk()` aliases change rebase targets). Propose the exact command and wait for approval.
+
 ```bash
-jj config list                # show effective config
-jj config set --user user.email "me@example.com"
-jj config set --repo git.push origin
-jj config edit --user         # opens an editor — DO NOT USE IN AGENT
+jj config list                # read-only — safe
+jj config set --user user.email "me@example.com"   # WRITE — ask first
+jj config set --repo git.push origin               # WRITE — ask first
+jj config edit --user         # WRITE + opens an editor — never use in agent (hangs, and needs permission anyway)
 ```
 
-For agent use, prefer `jj config set` (non-interactive) over `jj config edit`.
+Note `jj config edit` is doubly off-limits in an agent: it both hangs (interactive editor) and writes config. When the user has approved a config change, make it with a single non-interactive `jj config set`.
 
 ## Useful Advanced Commands
 
