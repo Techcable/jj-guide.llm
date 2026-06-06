@@ -89,6 +89,8 @@ jj git fetch
 
 ## Multiple Remotes
 
+> **Permission required.** The `jj config set --repo` commands below write persistent settings that change where `jj git push`/`fetch` send your code and what `trunk()` resolves to. Don't run them on your own — show the user the exact commands and get explicit approval first.
+
 Two common workflows:
 
 ### Contributing upstream via a GitHub-style fork

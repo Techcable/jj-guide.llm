@@ -16,6 +16,7 @@ If `.jj/` exists in the repo root, this is a jj repo. **Use `jj` commands, not `
 - **VERIFY** mutations with `jj st` and `jj log` after `squash`, `abandon`, `rebase`, `restore`, `commit`. jj will silently do exactly what you asked, even if it wasn't what you meant.
 - **PREFER change IDs** (letters, e.g. `nmwwolux`) over commit IDs (hex). Change IDs are stable across rewrites.
 - **NEVER** rebase or describe an immutable commit (e.g. `main` if it's tracking a remote). Target the commit *above* it, or use `main@origin` as `--destination`.
+- **NEVER** edit config without explicit user permission. `jj config set`/`jj config edit` (whether `--user` or `--repo`) write persistent settings that silently alter later behavior — `git.push`/`git.fetch` change where your code goes, `revset-aliases."trunk()"` changes what `trunk()` resolves to. Propose the exact command and wait for approval.
 - If you get stuck, `jj undo` reverses the last operation. `jj op log` shows everything; `jj op restore <op-id>` rewinds the whole repo.
 
 ## Mental Model
