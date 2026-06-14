@@ -55,6 +55,20 @@ jj st                       # review
 
 Style B keeps the message in the same change you're editing, which is convenient for `jj squash`/`jj absorb` refinement. **Don't run `jj new` at the end** — leave that for the start of the next task.
 
+## Commit Message Trailers
+
+jj change descriptions are git commit messages — the same trailer conventions apply (`Co-Authored-By:`, `Signed-off-by:`, etc., in a final `Key: Value` paragraph). If your harness instructs you to end **git** commit messages with a trailer (e.g. a `Co-Authored-By:` line attributing the AI author), apply that **same** trailer to jj change descriptions. The git instruction is phrased around `git commit`; it does not fire automatically on `jj describe`/`jj commit`, so you must carry it over yourself.
+
+Put the trailer in its own final paragraph, separated from the message body by a blank line. With `-m`, pass two `-m` flags — jj joins them with a blank line:
+
+```bash
+jj describe -m "feat: add retry logic to uploader" \
+            -m "Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>"
+# same for: jj commit -m "..." -m "Co-Authored-By: ..."
+```
+
+Use the exact trailer text your harness specifies (the model name may differ from the example above). If you re-`describe` a change, re-include the trailer — `jj describe -m` replaces the whole description, so it won't persist on its own.
+
 ## Common Workflows
 
 ### Inspect
